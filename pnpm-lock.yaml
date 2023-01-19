@@ -5,6 +5,8 @@ specifiers:
   '@types/react-dom': ^18.0.9
   '@types/sql.js': ^1.4.4
   '@vitejs/plugin-react': ^3.0.0
+  drizzle-orm: ^0.15.3
+  drizzle-orm-sqlite: 0.15.4
   react: ^18.2.0
   react-dom: ^18.2.0
   sql.js: ^1.8.0
@@ -12,6 +14,8 @@ specifiers:
   vite: ^4.0.0
 
 dependencies:
+  drizzle-orm: 0.15.3_drizzle-orm-sqlite@0.15.4
+  drizzle-orm-sqlite: 0.15.4_6ui4e6ngqd3hp3cctczl6diqki
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   sql.js: 1.8.0
@@ -491,11 +495,9 @@ packages:
 
   /@types/emscripten/1.39.6:
     resolution: {integrity: sha512-H90aoynNhhkQP6DRweEjJp5vfUVdIj7tdPLsu7pq89vODD/lcugKfZOsfgwpvM6XUewEp2N5dCg1Uf3Qe55Dcg==}
-    dev: true
 
   /@types/node/18.11.18:
     resolution: {integrity: sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==}
-    dev: true
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
@@ -524,7 +526,6 @@ packages:
     dependencies:
       '@types/emscripten': 1.39.6
       '@types/node': 18.11.18
-    dev: true
 
   /@vitejs/plugin-react/3.0.1_vite@4.0.4:
     resolution: {integrity: sha512-mx+QvYwIbbpOIJw+hypjnW1lAbKDHtWK5ibkF/V1/oMBu8HU/chb+SnqJDAsLq1+7rGqjktCEomMTM5KShzUKQ==}
@@ -602,6 +603,52 @@ packages:
     dependencies:
       ms: 2.1.2
     dev: true
+
+  /drizzle-orm-sqlite/0.15.4_6ui4e6ngqd3hp3cctczl6diqki:
+    resolution: {integrity: sha512-EVD+ykq5RV77Al6brEig8MQRY8gnwryoS4cUHqek3RfmzH/6GV9D14L5ttpMTcUY2e5DLnHTmNePckssb/W+dA==}
+    peerDependencies:
+      '@cloudflare/workers-types': '>=3'
+      '@types/better-sqlite3': '*'
+      '@types/sql.js': '*'
+      better-sqlite3: '>=7 <9'
+      drizzle-orm: '>=0.15 <0.16'
+      sql.js: '>=1 <2'
+      sqlite3: '>=5 <6'
+    peerDependenciesMeta:
+      '@cloudflare/workers-types':
+        optional: true
+      '@types/better-sqlite3':
+        optional: true
+      '@types/sql.js':
+        optional: true
+      better-sqlite3:
+        optional: true
+      sql.js:
+        optional: true
+      sqlite3:
+        optional: true
+    dependencies:
+      '@types/sql.js': 1.4.4
+      drizzle-orm: 0.15.3_drizzle-orm-sqlite@0.15.4
+      sql.js: 1.8.0
+    dev: false
+
+  /drizzle-orm/0.15.3_drizzle-orm-sqlite@0.15.4:
+    resolution: {integrity: sha512-KHYGk6E4FyWBQV0GKfxnr+mJe/T+gd0lKW3Z7yO/PqnEGjPt/87ojy6g8ka0hzpfXILRuNlEilFBVoluYaXg7w==}
+    peerDependencies:
+      drizzle-orm-mysql: '>=0.15 <0.16'
+      drizzle-orm-pg: '>=0.15 <0.16'
+      drizzle-orm-sqlite: '>=0.15 <0.16'
+    peerDependenciesMeta:
+      drizzle-orm-mysql:
+        optional: true
+      drizzle-orm-pg:
+        optional: true
+      drizzle-orm-sqlite:
+        optional: true
+    dependencies:
+      drizzle-orm-sqlite: 0.15.4_6ui4e6ngqd3hp3cctczl6diqki
+    dev: false
 
   /electron-to-chromium/1.4.284:
     resolution: {integrity: sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA==}

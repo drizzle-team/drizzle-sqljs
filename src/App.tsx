@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import reactLogo from './assets/react.svg';
 import './App.css';
 import initSqlJs, { SqlValue } from 'sql.js';
+import { drizzle } from 'drizzle-orm-sqlite/sql.js';
+import { sql } from 'drizzle-orm';
 
 function App() {
 	const [now, setNow] = useState<SqlValue>();
@@ -14,11 +16,12 @@ function App() {
 				locateFile: (file) => `https://sql.js.org/dist/${file}`,
 			});
 
-			const db = new SQL.Database();
+			const sqlJs = new SQL.Database();
+			const db = drizzle(sqlJs);
 
-			const { now } = db
-				.prepare("select datetime('now') as now")
-				.getAsObject({});
+			const { now } = db.get<{ now: string }>(
+				sql`select datetime('now') as now`,
+			);
 
 			setNow(now);
 		})().catch((e) => console.error(e));
