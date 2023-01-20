@@ -17,23 +17,22 @@ const MainPage = ({}:Props) => {
     <>
       <Wrapper>
         <ContentWrapper>
-
-          <Title>Drizzle ORM + sql.js Northwind Traders example</Title>
+          <Title>Northwind Traders example</Title>
           <LeftContent>
             <Paragraphs>
               <Paragraph>
                 This is a demo of the Northwind dataset, running on{' '}
-                <a href="https://github.com/sql-js/sql.js/" target={'_blank'}>SQL.js</a> + <a href="https://www.sqlite.org/index.html" target={'_blank'}>sqlite</a> in your browser
+                <a href="https://driz.li/orm" target={"_blank"}>Drizzle ORM</a> + <a href="https://github.com/sql-js/sql.js/" target={'_blank'}>sql.js</a> + <a href="https://www.sqlite.org/index.html" target={'_blank'}>SQLite</a> in your browser
               </Paragraph>
               <Paragraph>
                 Check out{' '}
                 <a href="https://driz.li/sqljs" target={'_blank'}>
-                 this sours code on our GitHub
+                 this source code on our GitHub
                 </a>
               </Paragraph>
               <Paragraph>
                 This dataset was sourced from{' '}
-                  northwind-SQLite3, UI design from <a href="https://northwind.d1sql.com/" target={'_blank'}>Cloudflare D1 example</a>.
+                <a href="https://github.com/jpwhite3/northwind-SQLite3" target={"_blank"}>northwind-SQLite3</a>, UI design from <a href="https://northwind.d1sql.com/" target={'_blank'}>Cloudflare D1 example</a>.
               </Paragraph>
               <Paragraph>
                 You can use the UI to explore Supplies, Orders, Customers,
