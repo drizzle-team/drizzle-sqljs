@@ -63,7 +63,8 @@ function App() {
 				xhr.send();
 			};
 
-			loadBinaryFile('./public/nw.sqlite', function(data:any){
+			loadBinaryFile('./nw.sqlite', function(data:any){
+				console.log(data)
 				let sqldb = new sqlPromise.Database(data);
 				// Database is ready
 				const database = drizzle(sqldb);
