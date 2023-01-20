@@ -1,41 +1,124 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/*
+ * @NOTE: Prepend a `~` to css file paths that are in your node_modules
+ *        See https://github.com/webpack-contrib/sass-loader#imports
+ */
+body {
+  position: relative;
+  color: black;
+  height: 100vh;
+  font-size: 16px;
+  margin: 0;
+  background-color: rgba(249, 250, 251, 1);
+  padding: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+table {
+  display: grid;
+  grid-template-rows: 1.25rem 1fr;
+  grid-template-columns: 1fr;
+  height: 150px
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+tbody {
+  height: 100%;
+  overflow: auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+tr {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr)
 }
 
-.card {
-  padding: 2em;
+td, th {
+  border-top: 1px solid grey;
 }
 
-.read-the-docs {
-  color: #888;
+th {
+  background: #F74B33;
+  color: white
+}
+
+.container {
+  height: 2.5em;
+  position: relative;
+}
+
+.form__input {
+  position: absolute;
+  height: 100%;
+  width: 530px;
+  background: #fff;
+  border: 2px solid #ccc;
+  border-radius: 0.5em;
+  outline: none;
+  color: #000;
+  padding-left: 1em;
+}
+
+label {
+  position: absolute;
+  background: #fff;
+  color: #000;
+  font-family: sans-serif;
+  left: 1em;
+  top: 0.75em;
+  font-size: 16px;
+  cursor: text;
+  transition: top 350ms ease-in, font-size 350ms ease-in;
+}
+
+
+a {
+  padding: 0 !important;
+  margin: 0 !important;
+  color: #2563eb !important;
+}
+
+button {
+  background-color: white;
+  font-size: 16px;
+  padding: 5px 20px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  appearance: none;
+  box-shadow: 0px 8px 28px -6px rgba(24, 39, 75, 0.12),
+  0px 18px 88px -4px rgba(24, 39, 75, 0.14);
+  transition: all ease-in 0.1s;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+button:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  height: fit-content;
+  width: fit-content;
+  margin: 10px;
+}
+
+a:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+
+.Hello {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
 }
