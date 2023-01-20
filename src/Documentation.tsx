@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const Documentation = () => {
   const src = `
@@ -514,31 +516,30 @@ Response {
 
 MIT © [Electron React Boilerplate](https://github.com/electron-react-boilerplate)`;
   return (
-      <></>
-    // <Wrapper>
-    //   <ReactMarkdown
-    //     children={src}
-    //     components={{
-    //       code({ node, inline, className, children, ...props }) {
-    //         const match = /language-(\w+)/.exec(className || '');
-    //         return !inline && match ? (
-    //           // <SyntaxHighlighter
-    //           //   children={String(children).replace(/\n$/, '')}
-    //           //   // @ts-ignore
-    //           //   style={materialDark}
-    //           //   language={match[1]}
-    //           //   PreTag="div"
-    //           //   {...props}
-    //           // />
-    //         ) : (
-    //           <code className={className} {...props}>
-    //             {children}
-    //           </code>
-    //         );
-    //       },
-    //     }}
-    //   />
-    // </Wrapper>
+    <Wrapper>
+      <ReactMarkdown
+        children={src}
+        components={{
+          code({ node, inline, className, children, ...props }) {
+            const match = /language-(\w+)/.exec(className || '');
+            return !inline && match ? (
+              <SyntaxHighlighter
+                children={String(children).replace(/\n$/, '')}
+                // @ts-ignore
+                style={materialDark}
+                language={match[1]}
+                PreTag="div"
+                {...props}
+              />
+            ) : (
+              <code className={className} {...props}>
+                {children}
+              </code>
+            );
+          },
+        }}
+      />
+    </Wrapper>
   );
 };
 
