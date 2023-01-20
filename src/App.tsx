@@ -50,7 +50,8 @@ function App() {
 			// })
 			// const [SQL, buf] = await Promise.all([sqlPromise, dataPromise])
 			// const db = new SQL.Database(new Uint8Array(buf));
-			function loadBinaryFile(path:any,success:any) {
+			function loadBinaryFile(path:any,success:any, error:any) {
+				console.log(path,error )
 				let xhr = new XMLHttpRequest();
 				xhr.open("GET", path, true);
 				xhr.responseType = "arraybuffer";
@@ -65,13 +66,14 @@ function App() {
 			};
 
 			loadBinaryFile('./nw.sqlite', function(data:any){
-				console.log(data)
 				let sqldb = new sqlPromise.Database(data);
 				// Database is ready
 				const database = drizzle(sqldb);
 				const res = database.select(employees).all()
 				setDb(database)
 
+			}, function(error:any){
+				console.log(error)
 			});
 
 		})().catch((e) => console.error(e));
