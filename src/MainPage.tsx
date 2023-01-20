@@ -18,29 +18,22 @@ const MainPage = ({}:Props) => {
       <Wrapper>
         <ContentWrapper>
 
-          <Title>Welcome to Northwind Traders</Title>
-          <Subtitle>Running on Cloudflare D1</Subtitle>
+          <Title>Drizzle ORM + sql.js Northwind Traders example</Title>
           <LeftContent>
             <Paragraphs>
               <Paragraph>
                 This is a demo of the Northwind dataset, running on{' '}
-                <a href="./MainPage">
-                  Cloudflare's Workers
-                </a>
-                , and D1 - Cloudflare's newest SQL database, running on SQLite.
+                <a href="https://github.com/sql-js/sql.js/" target={'_blank'}>SQL.js</a> + <a href="https://www.sqlite.org/index.html" target={'_blank'}>sqlite</a> in your browser
               </Paragraph>
               <Paragraph>
-                Read our{' '}
-                <a href="./MainPage">
-                  D1 announcement
-                </a>{' '}
-                to learn more about D1.
+                Check out{' '}
+                <a href="https://driz.li/sqljs" target={'_blank'}>
+                 this sours code on our GitHub
+                </a>
               </Paragraph>
               <Paragraph>
                 This dataset was sourced from{' '}
-                <a href="https://github.com/jpwhite3/northwind-SQLite3">
-                  northwind- SQLite3.
-                </a>
+                  northwind-SQLite3, UI design from <a href="https://northwind.d1sql.com/" target={'_blank'}>Cloudflare D1 example</a>.
               </Paragraph>
               <Paragraph>
                 You can use the UI to explore Supplies, Orders, Customers,

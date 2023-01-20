@@ -66,11 +66,6 @@ const Home = ({ children }: any) => {
       route: '/customers',
     },
     {
-      title: 'Documentation',
-      icon: <InfoIcon />,
-      route: '/documentation',
-    },
-    {
       title: 'Search',
       icon: <SearchIcon />,
       route: '/search',
@@ -122,36 +117,6 @@ const Home = ({ children }: any) => {
         <Right>
           <RightMenuHeader>
             <div style={{ marginLeft: '240px' }}>{timer}</div>
-            <HeaderMenu
-              onClick={() => setIsMenuOpened(!isMenuOpened)}
-              isActive={isMenuOpened}
-            >
-              <MenuIcon />
-              <span>SQLite Links</span>
-              <ArrowDownIcon />
-            </HeaderMenu>
-            {isMenuOpened && (
-              <MenuOpened>
-                <MenuOpenedItem>
-                  <LinkWrapper>
-                    <LinkIcon />
-                  </LinkWrapper>
-                  Introducing C1
-                </MenuOpenedItem>
-                <MenuOpenedItem>
-                  <LinkWrapper>
-                    <LinkIcon />
-                  </LinkWrapper>
-                  SQLite SQL Flavour
-                </MenuOpenedItem>
-                <MenuOpenedItem>
-                  <LinkWrapper>
-                    <LinkIcon />
-                  </LinkWrapper>
-                  Durable Objects
-                </MenuOpenedItem>
-              </MenuOpened>
-            )}
           </RightMenuHeader>
         </Right>
         <Margin>{children}</Margin>

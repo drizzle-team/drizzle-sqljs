@@ -29,11 +29,7 @@ const DashboardPage = () => {
   return (
     <Wrapper>
       <TopContentWrapper>
-        <TopContentLeft>
-          <Title>Worker</Title>
-          <SubTitle>Colo: KBP</SubTitle>
-          <SubTitle>Country: UA</SubTitle>
-        </TopContentLeft>
+
         <TopContentRight>
           <Title>SQL Metrics</Title>
           <SubTitle>Query count: {query?.length}</SubTitle>

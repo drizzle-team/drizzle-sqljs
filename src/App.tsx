@@ -51,11 +51,9 @@ function App() {
 			// const [SQL, buf] = await Promise.all([sqlPromise, dataPromise])
 			// const db = new SQL.Database(new Uint8Array(buf));
 			function loadBinaryFile(path:any,success:any, error:any) {
-				console.log(path,error )
 				let xhr = new XMLHttpRequest();
 				xhr.open("GET", path, true);
 				xhr.responseType = "arraybuffer";
-				console.log('xhr', xhr)
 				xhr.onload = function() {
 					let data = new Uint8Array(xhr.response);
 					let arr = [];
@@ -99,7 +97,6 @@ function App() {
 						<Route path="/customers" element={<CustomersPage database={db} />} />
 						<Route path="/customer/:id" element={<Customer database={db} />} />
 						<Route path="/search" element={<SearchPage database={db} />} />
-						<Route path="/documentation" element={<Documentation />} />
 					</Routes>
 				</Home>
 			</Router>
