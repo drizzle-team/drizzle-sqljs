@@ -54,6 +54,7 @@ function App() {
 				let xhr = new XMLHttpRequest();
 				xhr.open("GET", path, true);
 				xhr.responseType = "arraybuffer";
+				console.log('xhr', xhr)
 				xhr.onload = function() {
 					let data = new Uint8Array(xhr.response);
 					let arr = [];
