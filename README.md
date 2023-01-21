@@ -1,4 +1,4 @@
-# drizzle-sqljs
+## Drizzle ORM + sql.js
 
 This is a demo of the Northwind dataset, running on [Drizzle ORM](https://driz.li/orm) + [sql.js](https://github.com/sql-js/sql.js/) + [SQLite](https://www.sqlite.org/index.html) in your browser
 This dataset was sourced from [northwind-SQLite3](https://github.com/jpwhite3/northwind-SQLite3), UI design from [Cloudflare D1 example](https://northwind.d1sql.com).
