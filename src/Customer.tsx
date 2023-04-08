@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {useNavigate, useParams} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import Ballot from './icons/Ballot';
-import {SQLJsDatabase} from "drizzle-orm-sqlite/sql.js";
+import {SQLJsDatabase} from "drizzle-orm/sql-js";
 import {customers} from "./data/schema";
 import {eq} from "drizzle-orm/expressions";
 import {setQuery} from "./store/actions/login";
@@ -39,10 +39,10 @@ const Customer = ({database}: Props) => {
     useEffect(() => {
         if (database && id) {
             const startTime = new Date().getTime();
-            const stmt = database.select(customers).where(eq(customers.id, id)).all();
+            const stmt = database.select().from(customers).where(eq(customers.id, id)).all();
             const endTime = new Date().getTime();
             setQueryTime([(endTime - startTime).toString()]);
-            setQueryArr([...queryArr, database.select(customers).where(eq(customers.id, id)).toSQL().sql]);
+            setQueryArr([...queryArr, database.select().from(customers).where(eq(customers.id, id)).toSQL().sql]);
             setCustomerData(stmt[0]);
         }
     }, [database, id]);

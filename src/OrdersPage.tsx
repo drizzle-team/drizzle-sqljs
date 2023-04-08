@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 import { useDispatch } from 'react-redux';
 import HeaderArrowIcon from './icons/HeaderArrowIcon';
 import Pagination from './Pagination';
-import {SQLJsDatabase} from "drizzle-orm-sqlite/sql.js";
+import {SQLJsDatabase} from "drizzle-orm/sql-js";
 import {details, orders} from "./data/schema";
 import {sql} from "drizzle-orm";
 import {asc, eq} from "drizzle-orm/expressions";
@@ -69,8 +69,7 @@ const OrdersPage = ({database}:Props) => {
   if(database){
     const startTime = new Date().getTime();
     const stmt = database
-        .select(orders)
-        .fields({
+        .select({
           id: orders.id,
           shippedDate: orders.shippedDate,
           shipName: orders.shipName,
@@ -81,6 +80,7 @@ const OrdersPage = ({database}:Props) => {
           totalPrice:
               sql`sum(${details.quantity} * ${details.unitPrice})`.as<number>(),
         })
+        .from(orders)
         .leftJoin(details, eq(orders.id, details.orderId))
         .groupBy(orders.id)
         .orderBy(asc(orders.id))
@@ -89,18 +89,18 @@ const OrdersPage = ({database}:Props) => {
         .all();
     const endTime = new Date().getTime();
     setQueryArr([...queryArr, database
-        .select(orders)
-        .fields({
+        .select({
           id: orders.id,
           shippedDate: orders.shippedDate,
           shipName: orders.shipName,
           shipCity: orders.shipCity,
           shipCountry: orders.shipCountry,
-          productsCount: sql`count(${details.productId})`.as<number>(),
-          quantitySum: sql`sum(${details.quantity})`.as<number>(),
+          productsCount: sql<number>`count(${details.productId})`,
+          quantitySum: sql<number>`sum(${details.quantity})`,
           totalPrice:
-              sql`sum(${details.quantity} * ${details.unitPrice})`.as<number>(),
+              sql<number>`sum(${details.quantity} * ${details.unitPrice})`,
         })
+        .from(orders)
         .leftJoin(details, eq(orders.id, details.orderId))
         .groupBy(orders.id)
         .orderBy(asc(orders.id))
@@ -108,7 +108,7 @@ const OrdersPage = ({database}:Props) => {
         .offset((currentPage - 1) * 20).toSQL().sql ]);
     // @ts-ignore
     setOrdersData(stmt);
-    const stmtCount = database.select(orders).all();
+    const stmtCount = database.select().from(orders).all();
     setQueryTime([(endTime - startTime).toString()]);
     setOrdersCount(stmtCount.length)
   }

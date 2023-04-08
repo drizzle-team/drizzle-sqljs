@@ -9,7 +9,7 @@ import initSqlJs, {Database} from "sql.js";
 import {setQuery} from "./store/actions/login";
 import {eq} from "drizzle-orm/expressions";
 import {suppliers} from "./data/schema";
-import {SQLJsDatabase} from "drizzle-orm-sqlite/sql.js";
+import {SQLJsDatabase} from "drizzle-orm/sql-js";
 
 
 type Props = {
@@ -43,9 +43,9 @@ const Supplier = ({database}: Props) => {
     useEffect(() => {
         if(database && id) {
             const startTime = new Date().getTime();
-            const stmt = database.select(suppliers).where(eq(suppliers.id, Number(id))).all();
+            const stmt = database.select().from(suppliers).where(eq(suppliers.id, Number(id))).all();
             const endTime = new Date().getTime();
-            setQueryArr([...queryArr, database.select(suppliers).where(eq(suppliers.id, Number(id))).toSQL().sql ]);
+            setQueryArr([...queryArr, database.select().from(suppliers).where(eq(suppliers.id, Number(id))).toSQL().sql ]);
             setQueryTime([(endTime - startTime).toString()]);
             setSupplierData(stmt[0]);
         }

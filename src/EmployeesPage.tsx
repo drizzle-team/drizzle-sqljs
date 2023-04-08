@@ -10,7 +10,7 @@ import {PaginationRow} from './OrdersPage';
 import Pagination from './Pagination';
 import {setQuery} from "./store/actions/login";
 import {selectQuery} from "./store/selectors/auth";
-import {SQLJsDatabase} from "drizzle-orm-sqlite/sql.js";
+import {SQLJsDatabase} from "drizzle-orm/sql-js";
 import {employees} from "./data/schema";
 
 type Page = {
@@ -94,16 +94,17 @@ const EmployeesPage = ({database}: Props) => {
         if (database) {
             const startTime = new Date().getTime();
             const stmt = database
-                .select(employees)
+                .select()
+                .from(employees)
                 .limit(20)
                 .offset((currentPage - 1) * 20)
                 .all();
-            const stmtCount = database.select(employees).all();
+            const stmtCount = database.select().from(employees).all();
             const endTime = new Date().getTime();
             setQueryTime([(endTime - startTime).toString()]);
             // @ts-ignore
             setEmployeesData(stmt);
-            setQueryArr([...queryArr, database.select(employees).limit(20).offset((currentPage - 1) * 20).toSQL().sql]);
+            setQueryArr([...queryArr, database.select().from(employees).limit(20).offset((currentPage - 1) * 20).toSQL().sql]);
             // @ts-ignore
             setEmployeesCount(stmtCount.length);
         }

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Ballot from './icons/Ballot';
-import {SQLJsDatabase} from "drizzle-orm-sqlite/sql.js";
+import {SQLJsDatabase} from "drizzle-orm/sql-js";
 import {Employee} from "./EmployeesPage";
 import {setQuery} from "./store/actions/login";
 import {eq} from "drizzle-orm/expressions";
@@ -40,9 +40,9 @@ const Employees = ({database}: Props) => {
   useEffect(() => {
     if (database && id) {
       const startTime = new Date().getTime();
-      const stmt = database.select(employees).where(eq(employees.id, Number(id))).all();
+      const stmt = database.select().from(employees).where(eq(employees.id, Number(id))).all();
       const endTime = new Date().getTime();
-      setQueryArr([...queryArr, database.select(employees).where(eq(employees.id, Number(id))).toSQL().sql ]);
+      setQueryArr([...queryArr, database.select().from(employees).where(eq(employees.id, Number(id))).toSQL().sql ]);
       setQueryTime([(endTime - startTime).toString()]);
       // @ts-ignore
       setEmployeesData(stmt[0]);

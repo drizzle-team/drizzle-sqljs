@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import HeaderArrowIcon from './icons/HeaderArrowIcon';
 import { PaginationRow } from './OrdersPage';
 import Pagination from './Pagination';
-import {SQLJsDatabase} from "drizzle-orm-sqlite/sql.js";
+import {SQLJsDatabase} from "drizzle-orm/sql-js";
 import {products} from "./data/schema";
 import {setQuery} from "./store/actions/login";
 
@@ -38,15 +38,16 @@ const ProductsPage = ({database}:Props) => {
     if(database){
         const startTime = new Date().getTime();
       const stmt = database
-          .select(products)
+          .select()
+          .from(products)
           .limit(20)
           .offset((currentPage - 1) * 20)
           .all();
-      const stmtCount = database.select(products).all();
+      const stmtCount = database.select().from(products).all();
         const endTime = new Date().getTime();
         setQueryTime([(endTime - startTime).toString()]);
       setProductsData(stmt);
-      setQueryArr([...queryArr, database.select(products).limit(20).offset((currentPage - 1) * 20).toSQL().sql ]);
+      setQueryArr([...queryArr, database.select().from(products).limit(20).offset((currentPage - 1) * 20).toSQL().sql ]);
       setProductsCount(stmtCount.length);
     }
   }, [currentPage, database]);

@@ -10,7 +10,7 @@ import HeaderArrowIcon from './icons/HeaderArrowIcon';
 import Pagination from './Pagination';
 import {PaginationRow, PaginationWrapper} from './OrdersPage';
 import initSqlJs from "sql.js";
-import {drizzle, SQLJsDatabase} from "drizzle-orm-sqlite/sql.js";
+import {drizzle, SQLJsDatabase} from "drizzle-orm/sql-js";
 import {suppliers} from "./data/schema";
 import {setLoadedFile, setQuery} from "./store/actions/login";
 import {selectLoadedFile} from "./store/selectors/auth";
@@ -43,11 +43,11 @@ const SuppliersPage = ({database}: Props) => {
     useEffect(() => {
         if (database) {
             const startTime = new Date().getTime();
-            const stmtCount = database.select(suppliers).all()
-            const stmt = database.select(suppliers).limit(20).offset((currentPage - 1) * 20).all();
+            const stmtCount = database.select().from(suppliers).all()
+            const stmt = database.select().from(suppliers).limit(20).offset((currentPage - 1) * 20).all();
             const endTime = new Date().getTime();
             setQueryTime([(endTime - startTime).toString()]);
-            setQueryArr([...queryArr, database.select(suppliers).limit(20).offset((currentPage - 1) * 20).toSQL().sql ]);
+            setQueryArr([...queryArr, database.select().from(suppliers).limit(20).offset((currentPage - 1) * 20).toSQL().sql ]);
             setSuppliersData(stmt);
             setSuppliersDataCount(stmtCount.length);
 

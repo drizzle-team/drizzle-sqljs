@@ -4,7 +4,7 @@ import {useNavigate, useParams} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import Ballot from './icons/Ballot';
 import {setQuery} from "./store/actions/login";
-import {SQLJsDatabase} from "drizzle-orm-sqlite/sql.js";
+import {SQLJsDatabase} from "drizzle-orm/sql-js";
 import {products} from "./data/schema";
 import {eq} from "drizzle-orm/expressions";
 
@@ -39,8 +39,8 @@ const Product = ({database}: Props) => {
 
     useEffect(() => {
         if (database) {
-            const stmt = database.select(products).where(eq(products.id, Number(id))).all();
-            setQueryArr([...queryArr, database.select(products).where(eq(products.id, Number(id))).toSQL().sql]);
+            const stmt = database.select().from(products).where(eq(products.id, Number(id))).all();
+            setQueryArr([...queryArr, database.select().from(products).where(eq(products.id, Number(id))).toSQL().sql]);
             // @ts-ignore
             setProductData(stmt[0]);
         }

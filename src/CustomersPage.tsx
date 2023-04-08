@@ -9,7 +9,7 @@ import HeaderArrowIcon from './icons/HeaderArrowIcon';
 import {PaginationRow} from './OrdersPage';
 import Pagination from './Pagination';
 import {setQuery} from "./store/actions/login";
-import {SQLJsDatabase} from "drizzle-orm-sqlite/sql.js";
+import {SQLJsDatabase} from "drizzle-orm/sql-js";
 import {customers} from "./data/schema";
 
 export type Customer = {
@@ -42,16 +42,17 @@ const CustomersPage = ({database}: Props) => {
         if (database) {
             const startTime = new Date().getTime();
             const stmt = database
-                .select(customers)
+                .select()
+                .from(customers)
                 .limit(20)
                 .offset((currentPage - 1) * 20)
                 .all();
-            const stmtCount = database.select(customers).all();
+            const stmtCount = database.select().from(customers).all();
             const endTime = new Date().getTime();
             setQueryTime([(endTime - startTime).toString()]);
             setCustomersData(stmt);
             setCustomersCount(stmtCount.length);
-            setQueryArr([...queryArr, database.select(customers).limit(20).offset((currentPage - 1) * 20).toSQL().sql]);
+            setQueryArr([...queryArr, database.select().from(customers).limit(20).offset((currentPage - 1) * 20).toSQL().sql]);
         }
     }, [currentPage]);
 

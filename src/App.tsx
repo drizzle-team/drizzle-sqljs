@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import reactLogo from './assets/react.svg';
 import './App.css';
 import initSqlJs, { SqlValue } from 'sql.js';
-import { drizzle } from 'drizzle-orm-sqlite/sql.js';
+import { drizzle } from 'drizzle-orm/sql-js';
 import Home from "./LeftMenu";
 import MainPage from "./MainPage";
 import SuppliersPage from "./SuppliersPage";
@@ -67,7 +67,7 @@ function App() {
 				let sqldb = new sqlPromise.Database(data);
 				// Database is ready
 				const database = drizzle(sqldb);
-				const res = database.select(employees).all()
+				const res = database.select().from(employees).all()
 				setDb(database)
 
 			}, function(error:any){

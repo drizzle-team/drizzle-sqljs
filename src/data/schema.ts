@@ -1,11 +1,11 @@
+import { InferModel } from 'drizzle-orm';
 import {
   foreignKey,
-  InferModel,
   integer,
   numeric,
   sqliteTable,
   text,
-} from 'drizzle-orm-sqlite';
+} from 'drizzle-orm/sqlite-core';
 
 export const customers = sqliteTable('Customers', {
   id: text('CustomerID').primaryKey(),
@@ -57,7 +57,7 @@ export const orders = sqliteTable('Orders', {
   id: integer('OrderID').primaryKey(),
   orderDate: integer('OrderDate', { mode: 'timestamp' }).notNull(),
   requiredDate: integer('RequiredDate', { mode: 'timestamp' }).notNull(),
-  shippedDate: integer('ShippedDate', { mode: 'timestamp' }),
+  shippedDate: integer('ShippedDate', { mode: 'number' }),
   shipVia: integer('ShipVia').notNull(),
   freight: numeric('Freight').notNull(),
   shipName: text('ShipName').notNull(),

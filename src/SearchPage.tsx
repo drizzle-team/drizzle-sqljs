@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import SearchIcon from './icons/SearchIcon';
 import useOnClickOutside from './hooks/useOnClickOutside';
-import {SQLJsDatabase} from "drizzle-orm-sqlite/sql.js";
+import {SQLJsDatabase} from "drizzle-orm/sql-js";
 import {customers, products} from "./data/schema";
 import {like} from "drizzle-orm/expressions";
 import {Product} from "./ProductsPage";
@@ -42,25 +42,27 @@ const SearchPage = ({database}:Props) => {
       if (isProductsActive) {
         const start = new Date().getTime();
         const stmt = database
-            .select(products)
+            .select()
+            .from(products)
             .where(like(products.name, `%${inputValue}%`))
             .all();
         const end = new Date().getTime();
         setQueryTimeProduct([(end - start).toString()]);
         setSearchResponseProducts(stmt);
-        setQueryArr([...queryArr, database.select(products).where(like(products.name, `%${inputValue}%`)).toSQL().sql ]);
+        setQueryArr([...queryArr, database.select().from(products).where(like(products.name, `%${inputValue}%`)).toSQL().sql ]);
       }
 
       if (!isProductsActive) {
         const startTimeCustomer = new Date().getTime();
         const stmt = database
-            .select(customers)
+            .select()
+            .from(customers)
             .where(like(customers.contactName, `%${inputValue}%`))
             .all();
         const endTimeCustomer = new Date().getTime();
         setQueryTimeCustomer([(endTimeCustomer - startTimeCustomer).toString()]);
         setSearchResponseCustomer(stmt);
-        setQueryArr([...queryArr, database.select(customers).where(like(customers.contactName, `%${inputValue}%`)).toSQL().sql ]);
+        setQueryArr([...queryArr, database.select().from(customers).where(like(customers.contactName, `%${inputValue}%`)).toSQL().sql ]);
       }
     }
   };

@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { format } from 'date-fns';
 import Ballot from './icons/Ballot';
-import {SQLJsDatabase} from "drizzle-orm-sqlite/sql.js";
+import {SQLJsDatabase} from "drizzle-orm/sql-js";
 import {details, orders, products, shipper} from "./data/schema";
 import {sql} from "drizzle-orm";
 import {eq} from "drizzle-orm/expressions";
@@ -68,8 +68,7 @@ const Order = ({database}:Props) => {
   useEffect(() => {
       const startTime = new Date().getTime();
       const stmtTable = database
-        .select(products)
-        .fields({
+        .select({
           orderId: details.orderId,
           unitPrice: products.unitPrice,
           discount: details.discount,
@@ -80,13 +79,13 @@ const Order = ({database}:Props) => {
           totalQuantity: sql`sum(${details.quantity})`,
           totalProducts: sql`count(${details.orderId})`,
         })
+        .from(products)
         .leftJoin(details, eq(details.productId, products.id))
         .where(eq(details.orderId, Number(id)))
         .all();
 
     const stmtData = database
-        .select(orders)
-        .fields({
+        .select({
           orderId: orders.id,
           employeeId: orders.employeeId,
           orderDate: orders.orderDate,
@@ -105,6 +104,7 @@ const Order = ({database}:Props) => {
           totalQuantity: sql`sum(${details.quantity})`,
           totalProducts: sql`count(${details.orderId})`,
         })
+        .from(orders)
         .leftJoin(details, eq(orders.id, details.orderId))
         .leftJoin(shipper, eq(orders.shipVia, shipper.id))
         .where(eq(orders.id, Number(id)))
@@ -112,42 +112,42 @@ const Order = ({database}:Props) => {
         .all();
     const endTime = new Date().getTime();
       setQueryArr([...queryArr, database
-          .select(products)
-          .fields({
-              orderId: details.orderId,
-              unitPrice: products.unitPrice,
-              discount: details.discount,
-              productId: products.id,
-              productName: products.name,
-              totalDiscount: sql`sum(${details.unitPrice} * ${details.quantity} * ${details.discount})`,
-              totalPrice: sql`sum(${details.unitPrice} * ${details.quantity})`,
-              totalQuantity: sql`sum(${details.quantity})`,
-              totalProducts: sql`count(${details.orderId})`,
-          })
+          .select({
+            orderId: details.orderId,
+            unitPrice: products.unitPrice,
+            discount: details.discount,
+            productId: products.id,
+            productName: products.name,
+            totalDiscount: sql`sum(${details.unitPrice} * ${details.quantity} * ${details.discount})`,
+            totalPrice: sql`sum(${details.unitPrice} * ${details.quantity})`,
+            totalQuantity: sql`sum(${details.quantity})`,
+            totalProducts: sql`count(${details.orderId})`,
+        })
+          .from(products)
           .leftJoin(details, eq(details.productId, products.id))
           .where(eq(details.orderId, Number(id))).toSQL().sql]);
 
       setQueryArr([...queryArr, database
-          .select(orders)
-          .fields({
-              orderId: orders.id,
-              employeeId: orders.employeeId,
-              orderDate: orders.orderDate,
-              requiredDate: orders.requiredDate,
-              shippedDate: orders.shippedDate,
-              shipVia: orders.shipVia,
-              freight: orders.freight,
-              shipName: orders.shipName,
-              shipAddress: orders.shipRegion,
-              shipCity: orders.shipCity,
-              shipRegion: orders.shipRegion,
-              shipPostalCode: orders.shipPostalCode,
-              shipCountry: orders.shipCountry,
-              totalDiscount: sql`sum(${details.unitPrice} * ${details.quantity} * ${details.discount})`,
-              totalPrice: sql`sum(${details.unitPrice} * ${details.quantity})`,
-              totalQuantity: sql`sum(${details.quantity})`,
-              totalProducts: sql`count(${details.orderId})`,
-          })
+          .select({
+            orderId: orders.id,
+            employeeId: orders.employeeId,
+            orderDate: orders.orderDate,
+            requiredDate: orders.requiredDate,
+            shippedDate: orders.shippedDate,
+            shipVia: orders.shipVia,
+            freight: orders.freight,
+            shipName: orders.shipName,
+            shipAddress: orders.shipRegion,
+            shipCity: orders.shipCity,
+            shipRegion: orders.shipRegion,
+            shipPostalCode: orders.shipPostalCode,
+            shipCountry: orders.shipCountry,
+            totalDiscount: sql`sum(${details.unitPrice} * ${details.quantity} * ${details.discount})`,
+            totalPrice: sql`sum(${details.unitPrice} * ${details.quantity})`,
+            totalQuantity: sql`sum(${details.quantity})`,
+            totalProducts: sql`count(${details.orderId})`,
+        })
+          .from(orders)
           .leftJoin(details, eq(orders.id, details.orderId))
           .leftJoin(shipper, eq(orders.shipVia, shipper.id))
           .where(eq(orders.id, Number(id)))
